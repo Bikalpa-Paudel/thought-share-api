@@ -23,12 +23,14 @@ export const signup = async (req: any, res: any) => {
     }
     // Find the most recent OTP for the email
     const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-    if (response.length === 0 || otp !== response[0].otp) {
+    if (response.length === 0 || otp !== response[0].otp.toString()) {
       return res.status(400).json({
         success: false,
         message: "The OTP is not valid",
+        otp: response[0].otp,
       });
     }
+
     // Secure password
     let hashedPassword;
     try {
