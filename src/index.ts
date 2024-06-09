@@ -5,7 +5,9 @@ import dotenv from "dotenv";
 import otpRoutes from "./routes/otpRoutes";
 import authRoutes from "./routes/authRoutes";
 import userRoutes from "./routes/userRoutes";
+import postRoutes from "./routes/postRoutes"
 import cors from "cors";
+
 
 dotenv.config();
 const MONGO_URI = process.env.DATABASE_URI || "mongodb://localhost:27017/test";
@@ -36,6 +38,7 @@ app.get("/", (req, res) => {
 app.use("/otp", otpRoutes);
 app.use("/auth", authRoutes);
 app.use("/api", userRoutes);
+app.use("/api", postRoutes)
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
